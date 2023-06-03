@@ -19,7 +19,7 @@ export default async function getReservations(
     }
 
     if (userId) {
-        query.queryId = query;
+        query.userId = userId;
     }
 
     if (authorId) {
