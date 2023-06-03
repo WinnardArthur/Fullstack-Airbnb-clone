@@ -42,7 +42,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
       <div className="flex flex-row items-center gap-3">
         <div
           onClick={onRent}
-          className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-300 transition cursor-pointer">
+          className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-300 transition cursor-pointer"
+        >
           Airbnb your home
         </div>
         <div
@@ -61,25 +62,20 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             {currentUser ? (
               <>
                 <MenuItem
-                  onClick={() => router.push('/trips')}
-                  label="My trips" />
+                  onClick={() => router.push("/trips")}
+                  label="My trips"
+                />
                 <MenuItem onClick={registerModal.onOpen} label="My favorites" />
                 <MenuItem
-                  onClick={registerModal.onOpen}
+                  onClick={() => router.push("/reservations")}
                   label="My reservations"
                 />
                 <MenuItem
                   onClick={registerModal.onOpen}
                   label="My properties"
                 />
-                <MenuItem
-                  onClick={rentModal.onOpen}
-                  label="Airbnb my home"
-                />
-                <MenuItem
-                  onClick={() => signOut()}
-                  label="Logout"
-                />
+                <MenuItem onClick={rentModal.onOpen} label="Airbnb my home" />
+                <MenuItem onClick={() => signOut()} label="Logout" />
               </>
             ) : (
               <>
