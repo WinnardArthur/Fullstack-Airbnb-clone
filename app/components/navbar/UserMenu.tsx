@@ -48,10 +48,14 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
         </div>
         <div
           onClick={toggleOpen}
-          className="p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition"
+          className="p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 md:gap-1 rounded-full cursor-pointer hover:shadow-md transition"
         >
           {isOpen ? <BsChevronUp /> : <AiOutlineMenu />}
-          <div className="hidden md:block">
+          <p className="text-xs lg:text-sm hidden lg:block">{currentUser?.name?.substring(0, 10)}</p>
+          <p className="font-bold block lg:hidden">
+            {String(currentUser?.name).charAt(0)}
+          </p>
+          <div className="hidden md:flex items-center">
             <Avatar src={currentUser?.image} />
           </div>
         </div>
