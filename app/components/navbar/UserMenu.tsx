@@ -2,14 +2,15 @@
 
 import React, { useState, useCallback } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
+import { BsChevronUp } from "react-icons/bs";
 import Avatar from "../Avatar";
 import MenuItem from "./MenuItem";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRentModal from "@/app/hooks/useRentModal";
 import { SafeUser } from "@/app/types";
-import { signOut } from 'next-auth/react';  
-import { useRouter } from 'next/navigation';
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
@@ -29,12 +30,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 
   const onRent = useCallback(() => {
     if (!currentUser) {
-      return loginModal.onOpen(); 
+      return loginModal.onOpen();
     }
 
-    console.log('running')
+    console.log("running");
     rentModal.onOpen();
-
   }, [currentUser, loginModal, rentModal]);
 
   return (
@@ -50,7 +50,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           onClick={toggleOpen}
           className="p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition"
         >
-          <AiOutlineMenu />
+          {isOpen ? <BsChevronUp /> : <AiOutlineMenu />}
           <div className="hidden md:block">
             <Avatar src={currentUser?.image} />
           </div>
@@ -62,28 +62,64 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             {currentUser ? (
               <>
                 <MenuItem
-                  onClick={() => router.push("/trips")}
+                  onClick={() => {
+                    router.push("/trips");
+                    setIsOpen(false);
+                  }}
                   label="My trips"
                 />
                 <MenuItem
-                  onClick={() => router.push("/favorites")}
+                  onClick={() => {
+                    router.push("/favorites");
+                    setIsOpen(false);
+                  }}
                   label="My favorites"
                 />
                 <MenuItem
-                  onClick={() => router.push("/reservations")}
+                  onClick={() => {
+                    router.push("/reservations");
+                    setIsOpen(false);
+                  }}
                   label="My reservations"
                 />
                 <MenuItem
-                  onClick={() => router.push("/properties")}
+                  onClick={() => {
+                    router.push("/properties");
+                    setIsOpen(false);
+                  }}
                   label="My properties"
                 />
-                <MenuItem onClick={rentModal.onOpen} label="Airbnb my home" />
-                <MenuItem onClick={() => signOut()} label="Logout" />
+                <MenuItem
+                  onClick={() => {
+                    rentModal.onOpen();
+                    setIsOpen(false);
+                  }}
+                  label="Airbnb my home"
+                />
+                <MenuItem
+                  onClick={() => {
+                    signOut();
+                    setIsOpen(false);
+                  }}
+                  label="Logout"
+                />
               </>
             ) : (
               <>
-                <MenuItem onClick={loginModal.onOpen} label="Login" />
-                <MenuItem onClick={registerModal.onOpen} label="Sign up" />
+                <MenuItem
+                  onClick={() => {
+                    loginModal.onOpen();
+                    setIsOpen(false);
+                  }}
+                  label="Login"
+                />
+                <MenuItem
+                  onClick={() => {
+                    registerModal.onOpen();
+                    setIsOpen(false);
+                  }}
+                  label="Sign up"
+                />
               </>
             )}
           </div>
