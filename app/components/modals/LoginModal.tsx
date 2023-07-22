@@ -57,8 +57,8 @@ const LoginModal = () => {
 
   const submitAsGuestUser = useCallback(() => {
     onSubmit({
-      email: process.env.NEXT_PUBLIC_GUEST_USER_EMAIL,
-      password: process.env.NEXT_PUBLIC_GUEST_USER_PASSWORD,
+      email: process.env.GUEST_USER_EMAIL,
+      password: process.env.GUEST_USER_PASSWORD,
     });
   }, [onSubmit]);
 

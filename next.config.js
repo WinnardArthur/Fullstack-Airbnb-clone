@@ -10,6 +10,10 @@ const nextConfig = {
       "res.cloudinary.com",
     ],
   },
+  env: {
+    GUEST_USER_EMAIL: "airbnb_guestuser@gmail.com",
+    GUEST_USER_PASSWORD: "airbnb_guestuser"
+  }
 };
 
 module.exports = nextConfig;
